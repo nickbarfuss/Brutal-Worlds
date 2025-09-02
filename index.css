@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cursor-default: url('https://storage.googleapis.com/brutal-worlds/cursor/default.png') 6 6, auto;
+  --cursor-pointer: url('https://storage.googleapis.com/brutal-worlds/cursor/pointer.png') 6 6, pointer;
+  --cursor-grab: url('https://storage.googleapis.com/brutal-worlds/cursor/grab.png') 16 16, grab;
+  --cursor-grabbing: url('https://storage.googleapis.com/brutal-worlds/cursor/grabbing.png') 16 16, grabbing;
+  --cursor-spinner: url('https://storage.googleapis.com/brutal-worlds/cursor/spinner.png');
+  --cursor-order-attack: url('https://storage.googleapis.com/brutal-worlds/cursor/attack.png') 16 16, auto;
+  --cursor-order-assist: url('https://storage.googleapis.com/brutal-worlds/cursor/assist.png') 16 16, auto;
+  --cursor-order-invalid: url('https://storage.googleapis.com/brutal-worlds/cursor/invalid.png') 16 16, not-allowed;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #000000;
+  color: #ffffff;
+  user-select: none;
+  font-family: 'Open Sans', sans-serif;
+  cursor: var(--cursor-default);
+}
+
+/* Increased specificity to override potential conflicts from frameworks or base styles. */
+body button,
+body a,
+body [role="button"] {
+  cursor: var(--cursor-pointer);
+}
+
+/* This selector already had higher specificity, but we'll make it consistent. */
+body button:disabled {
+  cursor: var(--cursor-default);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+@layer utilities {
+  .font-dungeon {
+    font-family: 'Dungeon Depths', sans-serif;
+  }
+
+  /* Override Tailwind's grab and grabbing cursors to use our custom images */
+  body .cursor-grab {
+    cursor: var(--cursor-grab) !important;
+  }
+  body .cursor-grabbing {
+    cursor: var(--cursor-grabbing) !important;
+  }
+
+  .cursor-none {
+    cursor: none;
+  }
+  
+  .custom-cursor-spinner {
+    background-image: var(--cursor-spinner);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .cursor-order-attack {
+    cursor: var(--cursor-order-attack) !important;
+  }
+
+  .cursor-order-assist {
+    cursor: var(--cursor-order-assist) !important;
+  }
+
+  .cursor-order-invalid {
+    cursor: var(--cursor-order-invalid) !important;
+  }
+
+  @keyframes radial-timer-countdown {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: var(--circumference); }
+  }
+  @keyframes radial-timer-pulse {
+    0%, 100% { stroke: var(--player-color); }
+    50% { stroke: var(--player-color-pulse); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-in-fast {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-in-title {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes fade-in-scale-up {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes fade-out-scale-down {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.98); }
+  }
+  @keyframes fade-in-briefing {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-in-slow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-in-up {
+    from { transform: translate(-50%, 100px); }
+    to { transform: translate(-50%, 0); }
+  }
+  @keyframes slide-out-down {
+    from { transform: translate(-50%, 0); }
+    to { transform: translate(-50%, 100px); }
+  }
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slide-out-right {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+  @keyframes indeterminate-loader {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(200%); }
+  }
+  @keyframes confirm-order {
+    0% { width: 0%; opacity: 1; }
+    70% { width: 100%; opacity: 1; }
+    100% { width: 100%; opacity: 0; }
+  }
+  @keyframes fade-in-content {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fade-out-turn-number {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.9); }
+  }
+  @keyframes fade-in-scale-bounce-turn-number {
+    0% { opacity: 0; transform: scale(1.3); }
+    60% { opacity: 1; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes attention-pulse {
+    0%, 40%, 100% { transform: scale(1); }
+    20% { transform: scale(1.15); }
+  }
+
+  @keyframes intro-fade-out-content {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes letterbox-reveal-up {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+  }
+  @keyframes letterbox-reveal-down {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+  }
+  @keyframes letterbox-slide-in-from-top {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes letterbox-slide-in-from-bottom {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  @keyframes rotate-continuously {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes hourglass-tick {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+  }
+
+  .animate-radial-turn-timer {
+    animation-name: radial-timer-countdown, radial-timer-pulse;
+    animation-duration: var(--turn-duration), 1s;
+    animation-timing-function: linear, ease-in-out;
+    animation-delay: 0s, var(--pulse-delay);
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: forwards, none;
+  }
+
+  .animate-open-backdrop {
+    animation: fade-in 0.3s ease-out forwards;
+  }
+  .animate-close-backdrop {
+    animation: fade-out 0.3s ease-out forwards;
+  }
+  .animate-open-dialog {
+    animation: fade-in-scale-up 0.2s ease-out 50ms forwards;
+    opacity: 0;
+  }
+  .animate-close-dialog {
+    animation: fade-out-scale-down 0.2s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  .animate-fade-in-fast {
+    animation: fade-in-fast 3.2s ease-out forwards;
+  }
+  .animate-fade-in-title {
+    animation: fade-in-title 0.5s ease-out 0s both;
+  }
+  .animate-fade-in-title-delayed {
+    animation: fade-in-title 0.5s ease-out 0.1s both;
+  }
+  .animate-fade-in-briefing {
+    animation: fade-in-briefing 0.2s ease-out forwards;
+  }
+  .animate-fade-in-slow {
+    animation: fade-in-slow 8s ease-out forwards;
+  }
+  .animate-slide-in-up {
+    animation: slide-in-up 0.2s forwards;
+  }
+  .animate-slide-out-down {
+    animation: slide-out-down 0.2s forwards;
+  }
+  .animate-slide-in-right {
+    animation: slide-in-right 0.2s ease-out forwards;
+  }
+  .animate-slide-out-right {
+    animation: slide-out-right 0.2s ease-in forwards;
+  }
+  .animate-indeterminate {
+    animation: indeterminate-loader 1.5s infinite ease-in-out;
+  }
+  .animate-confirm-order {
+    animation: confirm-order 0.6s ease-out forwards;
+  }
+  .animate-fade-in-content {
+    animation: fade-in-content 0.4s ease-out forwards;
+  }
+  .animate-fade-out-turn {
+    animation: fade-out-turn-number 0.2s ease-in forwards;
+  }
+  .animate-fade-in-bounce-turn {
+    animation: fade-in-scale-bounce-turn-number 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+  .animate-fade-in-title-simple {
+    animation: fade-in-fast 1s ease-out forwards;
+  }
+  .animate-fade-in-chips-staggered {
+    animation: fade-in-fast 1s ease-out 0.5s forwards;
+  }
+  .animate-turn-attention-pulse {
+    animation: attention-pulse 1s linear 3;
+  }
+  .animate-intro-fade-out {
+      animation: fade-out 1s ease-out forwards;
+  }
+  .animate-intro-title-fade-in {
+    animation: fade-in-title 0.5s ease-out 1s forwards;
+  }
+  .animate-intro-title-fade-out {
+    animation: intro-fade-out-content 0.5s ease-out 1.4s forwards;
+  }
+  .animate-letterbox-reveal-up {
+    animation: letterbox-reveal-up 1s ease-in-out forwards;
+  }
+  .animate-letterbox-reveal-down {
+    animation: letterbox-reveal-down 1s ease-in-out forwards;
+  }
+  .animate-letterbox-slide-in-top {
+    animation: letterbox-slide-in-from-top 1s ease-in-out forwards;
+  }
+  .animate-letterbox-slide-in-bottom {
+    animation: letterbox-slide-in-from-bottom 1s ease-in-out forwards;
+  }
+  .animate-letterbox-reveal-up-delayed {
+    animation: letterbox-reveal-up 1s ease-in-out 0.4s forwards;
+  }
+  .animate-letterbox-reveal-down-delayed {
+    animation: letterbox-reveal-down 1s ease-in-out 0.4s forwards;
+  }
+  .animate-rotate-continuously {
+    animation: rotate-continuously 1s linear infinite;
+  }
+  .animate-hourglass-tick {
+    animation: hourglass-tick 2s linear infinite;
+  }
+}
